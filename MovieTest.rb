@@ -1,42 +1,40 @@
-#require './Movie_Data_Dos'
+require './Movie_Data_Dos'
 class MovieTest	 
 
+	attr_accessor :tests
+	attr_accessor :movie_data_test
+	def initialize
+		@movie_data_test = Movie_Data_Dos.new("ml-100k", "u1.base")
+	end 
 	#moviedata = Movie_Data_Dos.new("ml-100k", "u1.base") 
+	
 	def mean
 		mean_array = Array.new 
-		pred = 0
-		mean_array.push("results")
-			mean_array.each do |i| 
-				puts mean_array
-			end  
-		
-		puts "the prediction is #{pred}"
-		return pred
-		
+		mean = 0
+		mean_array.push(mean) 
+	return mean  
 	end 
-
 	def stdev
 		stdeviation = 0
-		puts "standard deviation is #{stdeviation}"
-		#return stdeviation
+		#puts "standard deviation is #{stdeviation}"
+		return stdeviation
 	end 
 
 	def rms
-		mean 
 		sqroot = Math.sqrt(mean)
-		puts "the sqroot is #{sqroot}"
-		#return rms 
+		#puts "the sqroot is #{sqroot}"
+		return rms 
 	end
 
-	def to_a
-		u =0
-		m = 0
-		r = 0
-		p = 0
+	def to_a(u, m, r)
 		movie_test_array = ["the user is #{u}", "the movie is #{m}", "the rating is #{r}", 
-			"the prediction is #{p}"] 
+			"the prediction is #{@movie_data_test.predict(u,m)}"] 
 		puts movie_test_array
 	end 
+
 end 
 
-
+movietest = MovieTest.new 
+movietest.stdev 
+movietest.mean 
+movietest.to_a(1,2,3)

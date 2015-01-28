@@ -1,6 +1,6 @@
 require 'csv'
 require './MovieData'
-#require './MovieTest'
+
 #NOT FINISHED AT ALL FINDING MY OWN SOLUTIONS  
 class Movie_Data_Dos < MovieData
 
@@ -52,26 +52,23 @@ class Movie_Data_Dos < MovieData
  	end 
 
  	def predict(u,m)
- 		prediction = 0.0
+ 		prediction = 0
+ 		#loop through the array, and determine if the rating exists
  		@movie.each do |row| 
- 			if u == row["user_id"].to_i && row["movie_id"].to_i
- 				if rating(u,m) > 3
- 					prediction = 4 
- 				return prediction
- 			elsif rating(u, m) < 3
-
- 				return prediction
- 			end 
+ 			if u == row["user_id"].to_i && m == row["movie_id"].to_i
+ 				prediction = row["rating"].to_i
+ 			#else
+ 			#	prediction = row["rating"].to_f
+ 			end  
  		end
+ 		return prediction
  	end
 
- 	def run_test(k)
- 		puts "the movies are #{movies(4)}"
+ 	def run_test
+ 		puts "the movies that are watched by user #{4} are #{movies(4)}"
 		puts "the viewers of movie #{3} are #{viewers(3)}"
 		puts "the ratings that user #{1} gave movie #{1} are #{rating(1,1)}" 
-		puts "the prediction that user #{1} gave movie #{1} is #{predict(1,1)}" 
- 		#t = MovieTest.new 
- 		#t.mean
+		puts "the predicted rating that user #{1} will give movie #{1} is #{predict(1,1)}" 
  		#t.stdev 
  		#t.rms 
  	end 
@@ -79,6 +76,6 @@ end
 
 #prints all the data, but not really important for this (just yet)
 #moviedata = Movie_Data_Dos.new("ml-100k") 
-moviedata = Movie_Data_Dos.new("ml-100k", :u1)
-moviedata.load_data
-moviedata.run_test(100)
+#moviedata = Movie_Data_Dos.new("ml-100k", :u1)
+#moviedata.load_data
+#moviedata.run_test

@@ -24,10 +24,10 @@ class MovieData
  		#these loops are always confusing, but it's based on columns which are separated in tabs
  		#idea also inspired by this http://www.sitepoint.com/guide-ruby-csv-library-part/
 		CSV.foreach('u.data', {col_sep: "\t"}) do |row|
-  		row_hash = Hash["user_id", row[0], "movie_id", row[1], "rating", row[2]]
+  		row_hash = Hash["user_id", row[0], "movie_id", row[1], "rating", row[2], "time", row[3]]
   		@movie.push(row_hash)	#push the hash into a movie array
 		end
-		puts "loaded data"
+		#puts "loaded data"
 	 end
 	
 	#popularity is defined as the number of users a given movie has
@@ -95,57 +95,7 @@ class MovieData
  		end 
  		puts "The users with the most similar taste with user #{original_user} is user #{user_x}"
  	end 
- 	
- 	def rating(u, m)
- 		 rating = 0 
- 		 @movie.each do |row| #loops through the rows of movie data 
- 			if u == row["user_id"].to_i
- 				if m == row["movie_id"].to_i #goes to the movie_id hash
- 					rating = "rating".to_i  	
- 				end
- 			end
- 		end
- 		puts "rating is #{rating}" 
- 	end 
-
- 	def movies(u)
- 	movie_array = Array.new   
- 		#loop through the array
- 		@movie.each do |row|
- 			if u.to_i == row["movie_id"].to_i
- 				movie_array << u  
- 			end 
- 		end 
- 	movie_array.each { |a|"[#{a}] " } 
- end 
-
- def run_test
- 	moviedata = MovieData.new
- 	moviedata.predict(u,m)
-
-
- end 
 end 
-
-
 
 #prints all the data, but not really important for this (just yet)
 #moviedata = MovieData.new 
-
-#moviedata.load_data
-#moviedata.popularity(28)
-#moviedata.popularity_list
-#moviedata.similarity(1, 4)
-#moviedata.most_similar(1)
-
-
-#### new instance methods 
-#z = MovieData.new
-#z.new("u.data")
-#z.rating(12, 23)
-#z.movies(1) 
-#z = MovieData.new('u1.test')
-#z.predict(u,m)
-#z.movies(u)
-#z.viewers(m)
-#z.run_test(k)

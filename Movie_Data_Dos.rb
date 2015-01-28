@@ -1,6 +1,6 @@
 require 'csv'
 require './MovieData'
-require './MovieTest'
+#require './MovieTest'
 #NOT FINISHED AT ALL FINDING MY OWN SOLUTIONS  
 class Movie_Data_Dos < MovieData
 
@@ -9,12 +9,6 @@ class Movie_Data_Dos < MovieData
 	attr_accessor :movie
 	attr_accessor :popularity_counter
 	attr_accessor :u1 
-
-	def initialize(folder)
-		@movie = Array.new #an array that has all of themovie references
-	    @popularity = Hash.new #the hash that will be divided into the different rows for the different categories
-		@u1 = folder
-	end 
 	
 	def initialize(folder, file)
 		@movie = Array.new #an array that has all of themovie references
@@ -58,21 +52,24 @@ class Movie_Data_Dos < MovieData
  	end 
 
  	def predict(u,m)
- 		viewers(m)
- 		movies(u)
+ 		prediction = 0.0
  		@movie.each do |row| 
- 		prediction = rating(u,m)
- 			if prediction > 1.0 && prediction < 5.0
+ 			if u == row["user_id"].to_i && row["movie_id"].to_i
+ 				if rating(u,m) > 3
+ 					prediction = 4 
  				return prediction
- 			else 
+ 			elsif rating(u, m) < 3
+
  				return prediction
  			end 
  		end
  	end
 
  	def run_test(k)
- 		@movie.each do |k|
- 		end 
+ 		puts "the movies are #{movies(4)}"
+		puts "the viewers of movie #{3} are #{viewers(3)}"
+		puts "the ratings that user #{1} gave movie #{1} are #{rating(1,1)}" 
+		puts "the prediction that user #{1} gave movie #{1} is #{predict(1,1)}" 
  		#t = MovieTest.new 
  		#t.mean
  		#t.stdev 
@@ -84,8 +81,4 @@ end
 #moviedata = Movie_Data_Dos.new("ml-100k") 
 moviedata = Movie_Data_Dos.new("ml-100k", :u1)
 moviedata.load_data
-puts "the movies are #{moviedata.movies(4)}"
-puts "the viewers of movie #{3} are #{moviedata.viewers(3)}"
-puts "the ratings that user #{1} gave movie #{1} are #{moviedata.rating(1,1)}" 
-puts "the prediction that user #{1} gave movie #{1} is #{moviedata.predict(1,1)}" 
 moviedata.run_test(100)

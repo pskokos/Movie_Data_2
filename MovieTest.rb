@@ -10,7 +10,7 @@ class MovieTest
 	
 	def mean
 		mean_array = Array.new 
-		mean = 0
+		mean = 2
 		mean_array.push(mean) 
 	return mean  
 	end 
@@ -19,11 +19,11 @@ class MovieTest
 		#puts "standard deviation is #{stdeviation}"
 		return stdeviation
 	end 
+	def sqroot
 
-	def rms
-		sqroot = Math.sqrt(mean)
+	sqroot = Math.sqrt(mean)
 		#puts "the sqroot is #{sqroot}"
-		return rms 
+		return sqroot
 	end
 
 	def to_a(u, m, r)
@@ -37,4 +37,5 @@ end
 movietest = MovieTest.new 
 movietest.stdev 
 movietest.mean 
+movietest.sqroot
 movietest.to_a(1,2,3)

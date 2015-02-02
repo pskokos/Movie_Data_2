@@ -9,19 +9,26 @@ class MovieTest
 	#moviedata = Movie_Data_Dos.new("ml-100k", "u1.base") 
 	
 	def mean
+		#@movie_data_test.predict 
 		mean_array = Array.new 
-		mean = 2
-		mean_array.push(mean) 
-	return mean  
+		mean = 0
+			mean_array.each do |i|
+				mean_array.push(mean) 
+			end
+		return mean_array  
 	end 
+
 	def stdev
 		stdeviation = 0
 		#puts "standard deviation is #{stdeviation}"
 		return stdeviation
 	end 
 	def sqroot
-
-	sqroot = Math.sqrt(mean)
+		meansum = 0 
+		mean.each do |i| 
+		meansum += 1 
+		end 
+	sqroot = Math.sqrt(meansum)
 		#puts "the sqroot is #{sqroot}"
 		return sqroot
 	end
@@ -37,5 +44,5 @@ end
 movietest = MovieTest.new 
 movietest.stdev 
 movietest.mean 
-movietest.sqroot
+puts "sqroot is #{movietest.sqroot}" 
 movietest.to_a(1,2,3)

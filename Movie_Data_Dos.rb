@@ -9,9 +9,16 @@ class Movie_Data_Dos < MovieData
 	attr_accessor :movie
 	attr_accessor :popularity_counter
 	attr_accessor :u1 
-	
+
 	def initialize(folder, file)
 		@movie = Array.new #an array that has all of themovie references
+	    @popularity = Hash.new #the hash that will be divided into the different rows for the different categories
+		@u1 = file 
+	end 
+
+	
+	def self.initialize(file)
+	 	@movie = Array.new #an array that has all of themovie references
 	    @popularity = Hash.new #the hash that will be divided into the different rows for the different categories
 		@u1 = file 
 	end 
@@ -76,6 +83,6 @@ end
 
 #prints all the data, but not really important for this (just yet)
 #moviedata = Movie_Data_Dos.new("ml-100k") 
-#moviedata = Movie_Data_Dos.new("ml-100k", :u1)
-#moviedata.load_data
-#moviedata.run_test
+moviedata = Movie_Data_Dos.new("ml-100k", :u1)
+moviedata.load_data
+moviedata.run_test

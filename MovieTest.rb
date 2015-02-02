@@ -23,6 +23,7 @@ class MovieTest
 		#puts "standard deviation is #{stdeviation}"
 		return stdeviation
 	end 
+	
 	def sqroot
 		meansum = 0 
 		mean.each do |i| 

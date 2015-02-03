@@ -111,7 +111,7 @@ class MovieTest	 < Movie_Data_Dos
 	end 
 
 	def stdev
-		stdeviation = 0
+		
 		return stdeviation
 	end 
 	

@@ -1,7 +1,7 @@
 require 'csv'
 require './MovieData'
 
-#NOT FINISHED AT ALL FINDING MY OWN SOLUTIONS  
+#run_test is implemented in MovieTest, which is the movie test 
 class Movie_Data_Dos < MovieData
 
 	#fields used
@@ -16,7 +16,6 @@ class Movie_Data_Dos < MovieData
 		@u1 = file 
 	end 
 
-	
 	def self.initialize(file)
 	 	@movie = Array.new #an array that has all of themovie references
 	    @popularity = Hash.new #the hash that will be divided into the different rows for the different categories
@@ -66,21 +65,74 @@ class Movie_Data_Dos < MovieData
  				prediction = row["rating"].to_i 
  			end  
  		end
+ 		prediction += 1.0 
  		return prediction
  	end
 
  	def run_test
- 		puts "the movies that are watched by user #{4} are #{movies(4)}"
-		puts "the viewers of movie #{3} are #{viewers(3)}"
-		puts "the ratings that user #{1} gave movie #{1} are #{rating(1,1)}" 
-		puts "the predicted rating that user #{1} will give movie #{1} is #{predict(1,1)}" 
- 		#t.stdev 
- 		#t.rms 
+ 		puts """
+ 		the movies that are watched by user #{4} are #{movies(4)}
+		the viewers of movie #{3} are #{viewers(3)}
+		the rating that user #{1} gave movie #{1} is #{rating(1,1)} 
+		the predicted rating that user #{1} will give movie #{1} is #{predict(1,1)-1.0} """
+ 		t = MovieTest.new 
+ 		puts """
+ 		the mean is #{t.mean}
+ 		the standard deviation is #{t.stdev}  
+ 		the root mean square is #{t.sqroot} """ 
+ 		t.to_a(1,2,3) 
+ 		return t 
  	end 
 end 
 
+#*****Is this how we were supposed to implement MovieTest instead of a new .rb file?******
+
+class MovieTest	 < Movie_Data_Dos  
+
+	attr_accessor :tests
+	attr_accessor :movie_data_test
+
+	def initialize
+		@movie_data_test = Movie_Data_Dos.new("ml-100k", "u1.base")
+	end 
+	
+	#this determine the mean by 
+	def mean
+		predict_var = @movie_data_test.predict(1,2) 
+		mean_array = Array.new 
+			mean_array.each do |i|
+				mean_array.push(mean) 
+			end
+			predicter = 0
+			mean_array.each do mean_array.length
+				predicter += mean_array(i)
+			end 
+		return predicter  
+	end 
+
+	def stdev
+		stdeviation = 0
+		return stdeviation
+	end 
+	
+	def sqroot
+		meansum = 0 
+			#mean.each do |i| 
+			#meansum += 1 
+			#end 
+		sqroot = Math.sqrt(meansum)
+		return meansum 
+	end
+
+	#implements the movie_data_test object and shows the user, rating, and movie to dtermine the prediction
+	def to_a(u, m, r)
+		movie_test_array = ["the user is #{u}", "the movie is #{m}", "the rating is #{r}", 
+			"the prediction is #{@movie_data_test.predict(u,m)}"] 
+		puts movie_test_array
+	end 
+end 
+
 #prints all the data, but not really important for this (just yet)
-#moviedata = Movie_Data_Dos.new("ml-100k") 
 moviedata = Movie_Data_Dos.new("ml-100k", :u1)
 moviedata.load_data
 moviedata.run_test

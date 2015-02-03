@@ -62,7 +62,7 @@ class Movie_Data_Dos < MovieData
  		#loop through the array, and determine if the rating exists
  		@movie.each do |row| 
  			if u == row["user_id"].to_i && m == row["movie_id"].to_i
- 				prediction = row["rating"].to_i 
+ 				prediction += row["rating"].to_i 
  			end  
  		end
  		prediction += 1.0 
